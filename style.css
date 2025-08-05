@@ -1,0 +1,287 @@
+:root {
+  --primary-color: #1db954; /* Spotify yeşili */
+  --secondary-color: #121212; /* Koyu siyah */
+  --text-color: #ffffff;
+  --light-grey: #b3b3b3;
+  --dark-grey: #282828;
+  --accent-glow: rgba(30, 215, 96, 0.7); /* Parlama rengi */
+}
+
+body {
+  background: linear-gradient(45deg, #121212, #0a0a0a, #1a1a1a, #0d0d0d);
+  background-size: 400% 400%;
+  animation: gradientBackground 15s ease infinite;
+  color: var(--text-color);
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+@keyframes gradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.container {
+  background-color: var(--dark-grey);
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Daha belirgin gölge */
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.15); /* Daha belirgin kenarlık */
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(5px); /* Hafif bulanıklık efekti */
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.title {
+  font-size: 2.8rem; /* Daha büyük başlık */
+  color: var(--primary-color);
+  margin-bottom: 25px;
+  text-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color); /* Daha güçlü parlama */
+  letter-spacing: 2px; /* Harf aralığı */
+  font-weight: 600;
+}
+
+.input-container {
+  display: flex;
+  gap: 15px; /* Daha fazla boşluk */
+  margin-bottom: 25px;
+}
+
+#spotify-link {
+  flex-grow: 1;
+  padding: 18px; /* Daha büyük padding */
+  border: 2px solid var(--primary-color);
+  background-color: var(--secondary-color);
+  color: var(--light-grey);
+  border-radius: 10px; /* Daha yuvarlak köşeler */
+  font-size: 1.1rem; /* Daha büyük font */
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2); /* İç gölge */
+}
+
+#spotify-link::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+#spotify-link:focus {
+  outline: none;
+  border-color: #1ed760;
+  box-shadow: 0 0 15px var(--accent-glow), inset 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+button {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  padding: 18px 30px; /* Daha büyük padding */
+  border-radius: 10px; /* Daha yuvarlak köşeler */
+  font-size: 1.1rem; /* Daha büyük font */
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Daha belirgin gölge */
+}
+
+button:hover {
+  background-color: #1ed760;
+  transform: translateY(-3px); /* Daha belirgin yukarı hareket */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent-glow); /* Parlama ekle */
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.language-container {
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+label {
+  font-size: 1.2rem; /* Daha büyük font */
+  color: var(--light-grey);
+  font-weight: 500;
+}
+
+#language-select {
+  padding: 12px 20px; /* Daha büyük padding */
+  border: 2px solid var(--primary-color);
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  border-radius: 10px; /* Daha yuvarlak köşeler */
+  font-size: 1.1rem; /* Daha büyük font */
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231DB954'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center; /* Ok simgesini sağa kaydır */
+  background-size: 24px; /* Ok simgesini büyüt */
+  transition: all 0.3s ease;
+}
+
+#language-select:focus {
+  outline: none;
+  border-color: #1ed760;
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.lyrics-box {
+  background-color: var(--secondary-color);
+  border-radius: 12px; /* Daha yuvarlak köşeler */
+  padding: 30px; /* Daha fazla padding */
+  min-height: 280px; /* Daha fazla yükseklik */
+  text-align: left;
+  border: 2px solid var(--primary-color); /* Daha belirgin kenarlık */
+  white-space: pre-wrap;
+  overflow-y: auto;
+  max-height: 450px; /* Maksimum yükseklik */
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  box-shadow: inset 0 0 15px rgba(30, 215, 96, 0.1); /* İç parlama */
+}
+
+#lyrics-text {
+  margin: 0;
+  line-height: 1.9; /* Daha da iyi okunabilirlik */
+  color: var(--light-grey);
+  font-size: 1.15rem; /* Daha büyük font */
+  opacity: 0;
+  animation: fadeIn 0.8s forwards;
+  text-shadow: 0 0 5px rgba(30, 215, 96, 0.1); /* Hafif metin gölgesi */
+}
+
+/* Şarkı Başlığı ve Sanatçı Adı Stilleri */
+.song-title {
+  font-size: 1.8rem; /* Büyük font */
+  color: var(--primary-color);
+  margin-bottom: 5px;
+  text-shadow: 0 0 8px rgba(30, 215, 96, 0.4);
+  font-weight: 600;
+  text-align: center;
+}
+
+.artist-name {
+  font-size: 1.2rem; /* Orta boy font */
+  color: var(--light-grey);
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 400;
+}
+
+/* Yükleme animasyonu */
+.loading {
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Şarkı sözleri için fade-in animasyonu */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive tasarım */
+@media (max-width: 768px) {
+  .container {
+    padding: 30px;
+  }
+  .title {
+    font-size: 2.2rem;
+  }
+  .input-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  button {
+    width: 100%;
+    padding: 15px 25px;
+  }
+  .language-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  #language-select {
+    width: 100%;
+    margin-left: 0;
+    padding: 10px 15px;
+  }
+  .lyrics-box {
+    padding: 20px;
+    min-height: 200px;
+  }
+  #lyrics-text {
+    font-size: 1rem;
+  }
+  .song-title {
+    font-size: 1.5rem;
+  }
+  .artist-name {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+  .title {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+  }
+  #spotify-link,
+  button,
+  #language-select {
+    font-size: 0.95rem;
+    padding: 12px;
+  }
+  .lyrics-box {
+    padding: 15px;
+  }
+  #lyrics-text {
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+  .song-title {
+    font-size: 1.3rem;
+  }
+  .artist-name {
+    font-size: 0.9rem;
+  }
+}

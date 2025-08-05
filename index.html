@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spotify Lyrics Translator</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">Spotify Lyrics Translator</h1>
+      <div class="input-container">
+        <input
+          type="text"
+          id="spotify-link"
+          placeholder="Spotify şarkı linkini yapıştırın..."
+        />
+        <button id="get-lyrics-btn">Sözleri Getir</button>
+      </div>
+      <div class="language-container">
+        <label for="language-select">Çevir:</label>
+        <select id="language-select">
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+          <option value="tr" selected>Türkçe</option>
+          <!-- İstediğin diğer dilleri ekleyebilirsin -->
+        </select>
+      </div>
+      <div id="lyrics-output" class="lyrics-box">
+        <p id="lyrics-text">Şarkı sözleri burada görünecektir.</p>
+      </div>
+    </div>
+    <!-- Önbellek kırma parametresi eklendi: ?v=timestamp -->
+    <!-- Her denemede farklı bir sayı (örneğin güncel zaman damgası) ile değiştirebilirsiniz. -->
+    <script src="script.js?v=1722867600003"></script>
+  </body>
+</html>

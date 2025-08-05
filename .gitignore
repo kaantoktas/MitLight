@@ -1,0 +1,9 @@
+# Node.js bağımlılıkları
+node_modules/
+.env
+
+# Log dosyaları
+*.log
+
+# Hassas API anahtarları (server.js dosyasını hariç tutamayız ama hassas bilgileri .env'ye taşıyabiliriz)
+# Şimdilik server.js'deki anahtarları manuel olarak silmeniz veya .env dosyasına taşımanız gerekebilir.
