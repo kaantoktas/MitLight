@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function getSpotifyTrackData(trackId) {
     const response = await fetch(
-      `http://localhost:3000/spotify-track/${trackId}`
+      `https://mitlight.onrender.com/spotify-track/${trackId}`
     );
 
     if (!response.ok) {
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function getLyricsFromGenius(artist, title) {
     const response = await fetch(
-      `http://localhost:3000/genius-lyrics?artist=${encodeURIComponent(
+      `https://mitlight.onrender.com/genius-lyrics?artist=${encodeURIComponent(
         artist
       )}&title=${encodeURIComponent(title)}`
     );
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function translateText(text, source, target) {
     // Frontend'den kendi backend'imize istek gönderiyoruz.
     // Backend, bu isteği alıp DeepL API'sine iletecek.
-    const response = await fetch("http://localhost:3000/translate", {
+    const response = await fetch("https://mitlight.onrender.com/translate", {
       method: "POST",
       body: JSON.stringify({
         // JSON olarak gönderiyoruz
