@@ -1,10 +1,10 @@
 :root {
   --primary-color: #1db954; /* Spotify yeşili */
-  --secondary-color: #121212; /* Koyu siyah */
+  --secondary-color: #121212; 
   --text-color: #ffffff;
   --light-grey: #b3b3b3;
   --dark-grey: #282828;
-  --accent-glow: rgba(30, 215, 96, 0.7); /* Parlama rengi */
+  --accent-glow: rgba(30, 215, 96, 0.7);
 }
 
 body {
@@ -39,42 +39,42 @@ body {
   background-color: var(--dark-grey);
   border-radius: 15px;
   padding: 40px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Daha belirgin gölge */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); 
   width: 100%;
   max-width: 800px;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.15); /* Daha belirgin kenarlık */
+  border: 1px solid rgba(255, 255, 255, 0.15); 
   position: relative;
   z-index: 1;
-  backdrop-filter: blur(5px); /* Hafif bulanıklık efekti */
+  backdrop-filter: blur(5px); 
   -webkit-backdrop-filter: blur(5px);
 }
 
 .title {
-  font-size: 2.8rem; /* Daha büyük başlık */
+  font-size: 2.8rem; 
   color: var(--primary-color);
   margin-bottom: 25px;
-  text-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color); /* Daha güçlü parlama */
-  letter-spacing: 2px; /* Harf aralığı */
+  text-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color);
+  letter-spacing: 2px; 
   font-weight: 600;
 }
 
 .input-container {
   display: flex;
-  gap: 15px; /* Daha fazla boşluk */
+  gap: 15px; 
   margin-bottom: 25px;
 }
 
 #spotify-link {
   flex-grow: 1;
-  padding: 18px; /* Daha büyük padding */
+  padding: 18px;
   border: 2px solid var(--primary-color);
   background-color: var(--secondary-color);
   color: var(--light-grey);
-  border-radius: 10px; /* Daha yuvarlak köşeler */
-  font-size: 1.1rem; /* Daha büyük font */
+  border-radius: 10px; 
+  font-size: 1.1rem; 
   transition: all 0.3s ease;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2); /* İç gölge */
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
 
 #spotify-link::placeholder {
@@ -91,20 +91,20 @@ button {
   background-color: var(--primary-color);
   color: var(--secondary-color);
   border: none;
-  padding: 18px 30px; /* Daha büyük padding */
-  border-radius: 10px; /* Daha yuvarlak köşeler */
-  font-size: 1.1rem; /* Daha büyük font */
+  padding: 18px 30px; 
+  border-radius: 10px; 
+  font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease,
     box-shadow 0.3s ease;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Daha belirgin gölge */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); 
 }
 
 button:hover {
   background-color: #1ed760;
-  transform: translateY(-3px); /* Daha belirgin yukarı hareket */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent-glow); /* Parlama ekle */
+  transform: translateY(-3px); 
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent-glow); 
 }
 
 button:active {
@@ -121,24 +121,24 @@ button:active {
 }
 
 label {
-  font-size: 1.2rem; /* Daha büyük font */
+  font-size: 1.2rem; 
   color: var(--light-grey);
   font-weight: 500;
 }
 
 #language-select {
-  padding: 12px 20px; /* Daha büyük padding */
+  padding: 12px 20px; 
   border: 2px solid var(--primary-color);
   background-color: var(--secondary-color);
   color: var(--text-color);
-  border-radius: 10px; /* Daha yuvarlak köşeler */
-  font-size: 1.1rem; /* Daha büyük font */
+  border-radius: 10px; 
+  font-size: 1.1rem; 
   cursor: pointer;
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231DB954'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 15px center; /* Ok simgesini sağa kaydır */
-  background-size: 24px; /* Ok simgesini büyüt */
+  background-position: right 15px center; 
+  background-size: 24px; 
   transition: all 0.3s ease;
 }
 
@@ -150,32 +150,32 @@ label {
 
 .lyrics-box {
   background-color: var(--secondary-color);
-  border-radius: 12px; /* Daha yuvarlak köşeler */
-  padding: 30px; /* Daha fazla padding */
-  min-height: 280px; /* Daha fazla yükseklik */
+  border-radius: 12px; 
+  padding: 30px; 
+  min-height: 280px; 
   text-align: left;
-  border: 2px solid var(--primary-color); /* Daha belirgin kenarlık */
+  border: 2px solid var(--primary-color);
   white-space: pre-wrap;
   overflow-y: auto;
-  max-height: 450px; /* Maksimum yükseklik */
+  max-height: 450px; 
   transition: border-color 0.4s ease, box-shadow 0.4s ease;
   position: relative;
-  box-shadow: inset 0 0 15px rgba(30, 215, 96, 0.1); /* İç parlama */
+  box-shadow: inset 0 0 15px rgba(30, 215, 96, 0.1); 
 }
 
 #lyrics-text {
   margin: 0;
-  line-height: 1.9; /* Daha da iyi okunabilirlik */
+  line-height: 1.9; 
   color: var(--light-grey);
-  font-size: 1.15rem; /* Daha büyük font */
+  font-size: 1.15rem; 
   opacity: 0;
   animation: fadeIn 0.8s forwards;
-  text-shadow: 0 0 5px rgba(30, 215, 96, 0.1); /* Hafif metin gölgesi */
+  text-shadow: 0 0 5px rgba(30, 215, 96, 0.1); 
 }
 
-/* Şarkı Başlığı ve Sanatçı Adı Stilleri */
+
 .song-title {
-  font-size: 1.8rem; /* Büyük font */
+  font-size: 1.8rem; 
   color: var(--primary-color);
   margin-bottom: 5px;
   text-shadow: 0 0 8px rgba(30, 215, 96, 0.4);
@@ -184,14 +184,14 @@ label {
 }
 
 .artist-name {
-  font-size: 1.2rem; /* Orta boy font */
+  font-size: 1.2rem; 
   color: var(--light-grey);
   margin-bottom: 20px;
   text-align: center;
   font-weight: 400;
 }
 
-/* Yükleme animasyonu */
+
 .loading {
   animation: pulse 1s infinite alternate;
 }
@@ -205,7 +205,7 @@ label {
   }
 }
 
-/* Şarkı sözleri için fade-in animasyonu */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
