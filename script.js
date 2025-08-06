@@ -5,8 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const lyricsOutput = document.getElementById("lyrics-output");
   const lyricsText = document.getElementById("lyrics-text");
 
- 
-
   getLyricsBtn.addEventListener("click", async () => {
     const spotifyLink = spotifyLinkInput.value;
     if (!spotifyLink) {
@@ -55,15 +53,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   languageSelect.addEventListener("change", async () => {
-  
     const currentContent = lyricsText.innerHTML;
-    
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = currentContent;
     const songTitleElement = tempDiv.querySelector(".song-title");
     const artistNameElement = tempDiv.querySelector(".artist-name");
 
-    let actualLyricsToTranslate = tempDiv.textContent || ""; 
+    let actualLyricsToTranslate = tempDiv.textContent || "";
+
     if (songTitleElement) {
       actualLyricsToTranslate = actualLyricsToTranslate
         .replace(songTitleElement.textContent, "")
@@ -75,14 +72,13 @@ document.addEventListener("DOMContentLoaded", () => {
         .trim();
     }
 
- 
     actualLyricsToTranslate = actualLyricsToTranslate
       .replace(/\s{2,}/g, " ")
       .replace(/\n\s*\n/g, "\n")
       .trim();
 
     const targetLang = languageSelect.value;
-    const sourceLang = "en"; 
+    const sourceLang = "en";
 
     if (
       !actualLyricsToTranslate ||
@@ -97,14 +93,12 @@ document.addEventListener("DOMContentLoaded", () => {
     lyricsText.style.opacity = "0";
 
     try {
-    
       const spotifyLink = spotifyLinkInput.value;
       const url = new URL(spotifyLink);
       const pathname = url.pathname;
       const trackId = pathname.split("/").pop();
       const { artistName, songTitle } = await getSpotifyTrackData(trackId);
 
-  
       const translatedLyrics = await translateText(
         actualLyricsToTranslate,
         sourceLang,
@@ -123,8 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
       lyricsOutput.classList.remove("loading");
     }
   });
-
-  // --- Fonksiyonlar ---
 
   async function getSpotifyTrackData(trackId) {
     const response = await fetch(
@@ -157,13 +149,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return data.lyrics;
   }
 
- 
   async function translateText(text, source, target) {
-  
-    const response = await fetch('https://mitlight.onrender.com', {
+    const response = await fetch("https://mitlight.onrender.com/translate", {
       method: "POST",
       body: JSON.stringify({
-      
         text: text,
         source_lang: source,
         target_lang: target,
@@ -182,7 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const data = await response.json();
-   
     return data.translations[0].text;
   }
 });
