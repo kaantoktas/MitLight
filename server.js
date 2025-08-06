@@ -5,15 +5,16 @@ const cheerio = require("cheerio"); // Cheerio kütüphanesini dahil ediyoruz
 const app = express();
 const port = 3000; // Sunucunun çalışacağı port numarası
 
-// !!! ÖNEMLİ: API Anahtarlarınızı buraya yapıştırın !!!
-// Bu anahtarları GENIUS ve SPOTIFY geliştirici sayfalarından aldığınız değerlerle değiştirin.
-// Güvenlik nedeniyle, bu anahtarları gerçek bir projede doğrudan frontend kodunda tutmak yerine
-// bir backend sunucusu (proxy) üzerinden kullanmak daha güvenlidir.
-const SPOTIFY_CLIENT_ID = "aa056349b6984cf5a9c23b42d5bd30d0"; // Kendi Spotify Client ID'niz
-const SPOTIFY_CLIENT_SECRET = "026998bb439a49dcaa3523a514a70dfd"; // Kendi Spotify Client Secret'ınız
-const GENIUS_ACCESS_TOKEN =
-  "YjnYJLTE-kcHoQg9hn0AB97LGtmB5__i0qTv3WNAynQ9RtJvJMjrONBVYC2VC5AS"; // Kendi Genius Access Token'ınız
-const DEEPL_API_KEY = "ec8621f6-1844-4691-a43c-c91764e2349d:fx"; // Kendi DeepL API anahtarınız
+// .env dosyasındaki ortam değişkenlerini yüklemek için dotenv'i çağırın
+// Bu satır, dosyanın en başında olmalıdır.
+require('dotenv').config();
+
+// !!! ÖNEMLİ: API Anahtarlarınızı artık .env dosyasından alıyoruz !!!
+// Bu anahtarları doğrudan kodda tutmak yerine process.env ile erişiyoruz.
+const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
+const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
+const GENIUS_ACCESS_TOKEN = process.env.GENIUS_ACCESS_TOKEN;
+const DEEPL_API_KEY = process.env.DEEPL_API_KEY;
 
 // Middlewares
 app.use(express.json()); // JSON body'leri parse etmek için
