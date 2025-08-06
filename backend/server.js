@@ -1,26 +1,20 @@
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
-const cheerio = require("cheerio"); // Cheerio kütüphanesini dahil ediyoruz
+const cheerio = require("cheerio");
 const app = express();
-const port = 3000; // Sunucunun çalışacağı port numarası
+const port = 3000;
 
-// .env dosyasındaki ortam değişkenlerini yüklemek için dotenv'i çağırın
-// Bu satır, dosyanın en başında olmalıdır.
 require('dotenv').config();
 
-// !!! ÖNEMLİ: API Anahtarlarınızı artık .env dosyasından alıyoruz !!!
-// Bu anahtarları doğrudan kodda tutmak yerine process.env ile erişiyoruz.
 const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 const GENIUS_ACCESS_TOKEN = process.env.GENIUS_ACCESS_TOKEN;
 const DEEPL_API_KEY = process.env.DEEPL_API_KEY;
 
-// Middlewares
-app.use(express.json()); // JSON body'leri parse etmek için
-app.use(cors()); // CORS'u etkinleştirerek frontend'in erişimine izin veriyoruz
+app.use(express.json());
+app.use(cors());
 
-// Spotify'dan token alma fonksiyonu
 async function getSpotifyToken() {
   const authOptions = {
     method: "post",
@@ -48,7 +42,6 @@ async function getSpotifyToken() {
   }
 }
 
-// Spotify'dan şarkı bilgilerini getiren endpoint
 app.get("/spotify-track/:id", async (req, res) => {
   const trackId = req.params.id;
   try {
@@ -67,7 +60,6 @@ app.get("/spotify-track/:id", async (req, res) => {
   }
 });
 
-// Genius'tan şarkı sözlerini getiren endpoint (Web Kazıma Dahil)
 app.get("/genius-lyrics", async (req, res) => {
   const { artist, title } = req.query;
   try {
@@ -80,22 +72,19 @@ app.get("/genius-lyrics", async (req, res) => {
 
     const hits = searchResponse.data.response.hits;
     if (hits.length > 0) {
-      const songUrl = hits[0].result.url; // Şarkı sözlerinin bulunduğu Genius sayfasının URL'si
+      const songUrl = hits[0].result.url;
 
-      // Şarkı sözleri sayfasını çekiyoruz
       const lyricsPageResponse = await axios.get(songUrl);
-      const $ = cheerio.load(lyricsPageResponse.data); // Cheerio ile HTML'i yüklüyoruz
+      const $ = cheerio.load(lyricsPageResponse.data);
 
       let lyrics = "";
 
-      // Genius'taki şarkı sözlerini içeren ana div'i bulmaya çalışıyoruz
       const lyricsContainer = $('[data-lyrics-container="true"]');
 
       if (lyricsContainer.length > 0) {
-        lyricsContainer.find("br").replaceWith("\n"); // <br> etiketlerini newline karakterleriyle değiştiriyoruz
-        lyrics = lyricsContainer.text(); // İçindeki tüm metni alıyoruz
+        lyricsContainer.find("br").replaceWith("\n");
+        lyrics = lyricsContainer.text();
       } else {
-        // Alternatif veya eski Genius yapıları için yedek seçiciler
         const potentialLyricsDivs = $(
           'div[class*="Lyrics__Container"], div[class*="lyrics"], div[class*="SongPage__Lyrics"]'
         );
@@ -103,17 +92,14 @@ app.get("/genius-lyrics", async (req, res) => {
           potentialLyricsDivs.find("br").replaceWith("\n");
           lyrics = potentialLyricsDivs.first().text();
         } else {
-          // Son çare: Sayfanın body'sindeki tüm metni çekmeyi deneyebiliriz.
           lyrics = $("body").text();
         }
       }
 
-      // Şarkı sözlerini temizleme ve formatlama
-      lyrics = lyrics.replace(/\[.*?\]/g, "").trim(); // Köşeli parantez içindeki metinleri (örn: [Verse 1], [Chorus]) kaldır
-      lyrics = lyrics.replace(/\n\s*\n/g, "\n").trim(); // Fazla boş satırları tek boş satıra indir
-      lyrics = lyrics.replace(/\s{2,}/g, " "); // Birden fazla boşluğu tek boşluğa indir
+      lyrics = lyrics.replace(/\[.*?\]/g, "").trim();
+      lyrics = lyrics.replace(/\n\s*\n/g, "\n").trim();
+      lyrics = lyrics.replace(/\s{2,}/g, " ");
 
-      // "Contributors" ve şarkı adı/Lyrics başlık satırını temizle
       let lines = lyrics.split("\n");
       const lowerCaseTitle = title.toLowerCase();
       const lowerCaseArtist = artist.toLowerCase();
@@ -140,8 +126,8 @@ app.get("/genius-lyrics", async (req, res) => {
           isGeneralHeaderLine ||
           isShortAndLikelyHeader
         ) {
-          lines.splice(i, 1); // Bu satırı kaldır
-          i--; // Bir satır silindiği için indeksi geri al
+          lines.splice(i, 1);
+          i--;
         } else {
           break;
         }
@@ -149,7 +135,6 @@ app.get("/genius-lyrics", async (req, res) => {
       lyrics = lines.join("\n").trim();
 
       if (lyrics && lyrics.length > 100) {
-        // Çok kısa veya anlamsız sonuçları filtrele (en az 100 karakter)
         res.json({ lyrics: lyrics, url: songUrl });
       } else {
         res
@@ -173,14 +158,12 @@ app.get("/genius-lyrics", async (req, res) => {
   }
 });
 
-// DeepL Çeviri için endpoint
 app.post("/translate", async (req, res) => {
-  const { text, source_lang, target_lang } = req.body; // Frontend'den JSON olarak gelen body'yi alıyoruz
+  const { text, source_lang, target_lang } = req.body;
   try {
     const deeplResponse = await axios.post(
       "https://api-free.deepl.com/v2/translate",
       new URLSearchParams({
-        // DeepL API'si URL-encoded form data bekler
         text: text,
         source_lang: source_lang.toUpperCase(),
         target_lang: target_lang.toUpperCase(),
@@ -188,11 +171,11 @@ app.post("/translate", async (req, res) => {
       }).toString(),
       {
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded", // DeepL'e gönderdiğimiz Content-Type
+          "Content-Type": "application/x-www-form-urlencoded",
         },
       }
     );
-    res.json(deeplResponse.data); // DeepL'den gelen yanıtı frontend'e gönderiyoruz
+    res.json(deeplResponse.data);
   } catch (error) {
     console.error(
       "DeepL çeviri hatası:",
