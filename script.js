@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const lyricsOutput = document.getElementById("lyrics-output");
   const lyricsText = document.getElementById("lyrics-text");
 
+ 
 
   getLyricsBtn.addEventListener("click", async () => {
     const spotifyLink = spotifyLinkInput.value;
@@ -54,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   languageSelect.addEventListener("change", async () => {
-    
+  
     const currentContent = lyricsText.innerHTML;
     
     const tempDiv = document.createElement("div");
@@ -63,8 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const artistNameElement = tempDiv.querySelector(".artist-name");
 
     let actualLyricsToTranslate = tempDiv.textContent || ""; 
-
- 
     if (songTitleElement) {
       actualLyricsToTranslate = actualLyricsToTranslate
         .replace(songTitleElement.textContent, "")
@@ -76,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .trim();
     }
 
-   
+ 
     actualLyricsToTranslate = actualLyricsToTranslate
       .replace(/\s{2,}/g, " ")
       .replace(/\n\s*\n/g, "\n")
@@ -98,14 +97,14 @@ document.addEventListener("DOMContentLoaded", () => {
     lyricsText.style.opacity = "0";
 
     try {
-      
+    
       const spotifyLink = spotifyLinkInput.value;
       const url = new URL(spotifyLink);
       const pathname = url.pathname;
       const trackId = pathname.split("/").pop();
       const { artistName, songTitle } = await getSpotifyTrackData(trackId);
 
-     
+  
       const translatedLyrics = await translateText(
         actualLyricsToTranslate,
         sourceLang,
@@ -158,19 +157,19 @@ document.addEventListener("DOMContentLoaded", () => {
     return data.lyrics;
   }
 
-
+ 
   async function translateText(text, source, target) {
   
-    const response = await fetch("https://mitlight.onrender.com/translate", {
+    const response = await fetch('https://mitlight.onrender.com', {
       method: "POST",
       body: JSON.stringify({
-     
+      
         text: text,
         source_lang: source,
         target_lang: target,
       }),
       headers: {
-        "Content-Type": "application/json", 
+        "Content-Type": "application/json",
       },
     });
 
